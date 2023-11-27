@@ -34,10 +34,6 @@ contract MultiSig {
 
     fallback() external payable {}
 
-
-
-
-
     function isUnique(address[] memory arr) private pure returns (bool) {
         for (uint256 i = 0; i < arr.length - 1; i++) {
             for (uint256 j = i + 1; j < arr.length; j++) {
@@ -126,9 +122,6 @@ contract MultiSig {
 
         return txSuccess;
     }
-
-
-
 
     modifier onlySigners() {
         bool signer = false;
