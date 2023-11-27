@@ -12,7 +12,8 @@ Multi signature wallets utilize a combination of public and private keys. To ini
 
 #### 1. isUnique ()
 
-```s
+```solidity
+
     function isUnique(address[] memory arr) private pure returns (bool) {
         for (uint256 i = 0; i < arr.length - 1; i++) {
             for (uint256 j = i + 1; j < arr.length; j++) {
@@ -25,7 +26,7 @@ Multi signature wallets utilize a combination of public and private keys. To ini
 
 #### 2. proposeTx ()
 
-```s
+```solidity
         function proposeTx(
         uint256 _deadline,
         address _txAddress,
@@ -51,7 +52,7 @@ Multi signature wallets utilize a combination of public and private keys. To ini
 
 #### 3. confirmTx ()
 
-```s
+```solidity
     function confirmTx(uint256 _nonce) external onlySigners {
         require(_nonce < nonce, "Not exists.");
         require(txConfirmers[_nonce][msg.sender] == false, "Already approved.");
@@ -64,7 +65,7 @@ Multi signature wallets utilize a combination of public and private keys. To ini
  ```   
  #### 4. deleteTx ()
 
-```s
+```solidity
     function deleteTx(uint256 _nonce) external onlySigners {
         require(_nonce < nonce, "Not exists.");
         require(nonceToTx[_nonce].executed == false, "Already executed");
@@ -79,7 +80,7 @@ Multi signature wallets utilize a combination of public and private keys. To ini
  ```   
   #### 5. revokeTx ()
 
-```s
+```solidity
     function revokeTx(uint256 _nonce) external onlySigners {
         require(_nonce < nonce, "Not exists.");
         require(
@@ -95,7 +96,7 @@ Multi signature wallets utilize a combination of public and private keys. To ini
  ```  
    #### 6. executeTx ()
 
-```s
+```solidity
        function executeTx(uint256 _nonce) external onlySigners returns (bool) {
         require(_nonce < nonce, "Not exists.");
         require(nonceToTx[_nonce].deadline > block.timestamp, "Time out");
@@ -119,4 +120,3 @@ Multi signature wallets utilize a combination of public and private keys. To ini
     }
  ```  
 
- ```  
