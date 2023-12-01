@@ -24,7 +24,24 @@ Multi signature wallets utilize a combination of public and private keys. To ini
     }
 ```
 
-#### 2. proposeTx ()
+#### 2. constructor ()
+
+```solidity
+
+    constructor(address[] memory _signers, uint256 _requiredConfirmations) {
+        require(_signers.length > 0, "Any signer.");
+        require(isUnique(_signers), "Duplicate addresses.");
+        require(
+            _requiredConfirmations <= _signers.length,
+            "Not enough signer."
+        );
+
+        signers = _signers;
+        requiredConfirmations = _requiredConfirmations;
+    }
+```
+
+#### 3. proposeTx ()
 
 ```solidity
         function proposeTx(
@@ -50,7 +67,7 @@ Multi signature wallets utilize a combination of public and private keys. To ini
     }
 ```
 
-#### 3. confirmTx ()
+#### 4. confirmTx ()
 
 ```solidity
     function confirmTx(uint256 _nonce) external onlySigners {
@@ -63,7 +80,7 @@ Multi signature wallets utilize a combination of public and private keys. To ini
         txConfirmers[_nonce][msg.sender] = true;
     }
  ```   
- #### 4. deleteTx ()
+ #### 5. deleteTx ()
 
 ```solidity
     function deleteTx(uint256 _nonce) external onlySigners {
@@ -78,7 +95,7 @@ Multi signature wallets utilize a combination of public and private keys. To ini
         nonceToTx[_nonce].executed = true;
     }
  ```   
-  #### 5. revokeTx ()
+  #### 6. revokeTx ()
 
 ```solidity
     function revokeTx(uint256 _nonce) external onlySigners {
@@ -94,7 +111,7 @@ Multi signature wallets utilize a combination of public and private keys. To ini
         txConfirmers[_nonce][msg.sender] = false;
     }
  ```  
-   #### 6. executeTx ()
+   #### 7. executeTx ()
 
 ```solidity
        function executeTx(uint256 _nonce) external onlySigners returns (bool) {
@@ -120,3 +137,4 @@ Multi signature wallets utilize a combination of public and private keys. To ini
     }
  ```  
 
+For a more detailed explanation, please see this post. 
