@@ -137,4 +137,7 @@ Multi signature wallets utilize a combination of public and private keys. To ini
     }
  ```  
 
-For a more detailed explanation, please see this post. 
+
+
+[For a more detailed explanation, please see this post.](https://ahmetwkulekci.medium.com/anatomy-solidity-how-to-work-multi-signature-wallet-a44a49e70dec)
+
